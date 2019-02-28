@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Myeongjo:400,700,800');
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background: beige;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+.todolist {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.todolist-form {
+    margin: 2em 0;
+}
+
+.todolist__input {
+    padding: 10px;
+    border: 1px solid #000;
+}
+
+.todolist-register__btn {
+    padding: 10px;
+    border: none;
+}
