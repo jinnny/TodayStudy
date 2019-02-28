@@ -4,7 +4,8 @@ const clockContent = document.querySelector('.clock-content'),
 
 function getTime() {
     let currentDate = new Date(),
-        month = String(currentDate.getMonth()),
+        //0-11 불러옴
+        month = String(currentDate.getMonth() + 1),
         date = String(currentDate.getDate()),
         day = currentDate.getDay(),
         dayweek,
@@ -32,11 +33,11 @@ function getTime() {
         case 7: dayweek = '일';
             break;
     }
-        // console.log(dayweek);
+    // console.log(dayweek);
     let today = month + '월'+ date + '일' + dayweek + '요일';
     clockDate.innerHTML  = today;
     clockTime.innerHTML  = time;
-    // console.log(clockDate);
+    // console.log(month);
     // console.log(clockTime);
 }
 
