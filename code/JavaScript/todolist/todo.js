@@ -5,7 +5,6 @@ let  dataList = [];
 
 //check후 이벤트, li HTML 을 삭제하고, 해당 dataList을 splice 후 localstorage setItem
 function complete() {
-   this.remove();
    let currentClass = this.className.split(' ')[1];
    // currentClass.splice(0, 1);
    console.log('currentClass'+':'+currentClass);
