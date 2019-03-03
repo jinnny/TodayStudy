@@ -16,16 +16,23 @@ body {
     height: 100%;
 }
 
-.todolist-form {
+.todo-form {
     margin: 2em 0;
 }
 
-.todolist__input {
+.todo__input {
     padding: 10px;
     border: 1px solid #000;
 }
 
-.todolist-register__btn {
-    padding: 10px;
-    border: none;
+.todo__title {
+    font-size: 3rem;
+}
+.check-btn {
+    border: 0;
+}
+
+.todo__text {
+    font-size: 1.5rem;
+    margin-left: 10px;
 }
