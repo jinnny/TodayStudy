@@ -14,23 +14,35 @@
         </router-link>
       </div>
       <div class="board-item board-item-new">
-        <a class="new-board-btn" href="" @click.prevent="addBoard">
+        <a class="new-board-btn" href="" @click.prevent="SET_IS_ADD_BOARD(true)">
           Create new board...
         </a>
       </div>
     </div>
+    <AddBoard v-if="isAddBoard" @close="isAddBoard=false" @submit="onAddBoard"></AddBoard>
   </div>
 </template>
 
 <script>
   import {board} from '../api'
+  import AddBoard from  './AddBoard'
+  import {mapState, mapMutations} from 'vuex'
 
   export default {
+    components: {
+      AddBoard
+    },
     data() {
       return {
         loading: false,
-        boards: []
+        boards: [],
+        error: '',
       }
+    },
+    computed: {
+      ...mapState([
+       'isAddBoard'
+      ])
     },
     created() {
       this.fetchData()
@@ -41,6 +53,9 @@
       })
     },
     methods: {
+      ...mapMutations([
+        'SET_IS_ADD_BOARD'
+      ]),
       fetchData() {
         this.loading = true
         board.fetch()
@@ -51,8 +66,20 @@
             this.loading = false
           })
       },
-      addBoard() {
-        console.log('addBoard()')
+      // addBoard() {
+      //   // this.isAddBoard = true
+      // //  변이사용
+      //   this.$store.commit('SET_IS_ADD_BOARD', true)
+      // },
+      onAddBoard() {
+        // console.log(title)
+      //  api 호출하기(보드 추가하기)
+      //  보드가 추가되면 새로 패치데이터 불러옴
+      //   board.create(title)
+      //     .then(() => this.fetchData())
+        this.fetchData()
+      }
+        // console.log('addBoard()')
         //axios lib를 이용한 방식
         // axios.get('http://localhost:3000/boards')
         //   .then(res => {
@@ -80,7 +107,6 @@
         //     response: JSON.parse(req.response)
         //   }
         // })
-      }
     }
   }
 </script>

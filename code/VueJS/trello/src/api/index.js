@@ -6,6 +6,7 @@
 
 import axios from 'axios'
 import router from '../router'
+import store from "../store"
 
 const DOMAIN = 'http://localhost:3000'
 const UNAUTHROIZED = 401
@@ -36,6 +37,9 @@ if (token) setAuthInHeader(token)
 export const board = {
   fetch() {
     return request('get', '/boards')
+  },
+  create(title) {
+    return request('post','/boards', {title})
   }
 }
 
@@ -44,3 +48,4 @@ export const auth = {
     return request('post','/login',{email, password})
   }
 }
+
