@@ -12,6 +12,7 @@ export default new Router({
       path: '/',
       name: 'Main',
       component: Main,
+      props: true,
       meta: {
         // 레이아웃(header,footer) 호출 변수
         plainLayout: true
@@ -21,6 +22,7 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile,
+      props: true,
       meta: {
         plainLayout: false
       }

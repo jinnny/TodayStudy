@@ -6,7 +6,9 @@
 
 <template>
   <header class="header">
-    헤더에요
+    <div class="layout header-layout">
+      <h1 class="header__logo"><a href="/"><img src="../../assets/images/common/netflix_logo.svg" alt="Netflix" width="92" height="25"></a></h1>
+    </div>
   </header>
 </template>
 
@@ -16,6 +18,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  .header-layout {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+  }
 </style>

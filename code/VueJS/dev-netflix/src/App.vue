@@ -20,6 +20,8 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "assets/style/base/fonts";
-  @import "assets/style/base/reset";
+  @import "assets/style/base/_fonts";
+  @import "assets/style/base/_reset";
+
+  @import "assets/style/layout/_common";
 </style>

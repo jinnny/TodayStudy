@@ -1,0 +1,35 @@
+{
+  "member": {},
+  "members": [
+    {
+      "name": "양은진",
+      "language": "한국어",
+      "index": "0",
+      "avatar": "avatar_01.png"
+    },
+    {
+      "name": "알렉스",
+      "language": "영어",
+      "index" : "1",
+      "avatar": "avatar_02.jpeg"
+    },
+    {
+      "name": "묭묭",
+      "language": "영어",
+      "index": "2",
+      "avatar": "avatar_03.png"
+    },
+    {
+      "name": "민석킴",
+      "language": "한국어",
+      "index": "3",
+      "avatar": "avatar_02.jpeg"
+    },
+    {
+      "name": "민석킴",
+      "language": "한국어",
+      "index": "4",
+      "avatar": "avatar_02.jpeg"
+    }
+  ]
+}
