@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <Header v-if="$route.meta.plainLayout"/>
     <router-view/>
     <Footer v-if="$route.meta.plainLayout"/>
@@ -24,4 +24,8 @@ export default {
   @import "assets/style/base/_reset";
 
   @import "assets/style/layout/_common";
+  .app {
+    width: 100%;
+    height: 100%;
+  }
 </style>

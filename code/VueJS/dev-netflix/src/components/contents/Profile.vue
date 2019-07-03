@@ -79,6 +79,7 @@ export default {
         font-weight: 200;
         opacity: .5;
         margin-top: 2vh;
+        font-size: 24px;
       }
       &:hover,
       &:focus {

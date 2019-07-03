@@ -3,6 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueCarousel from 'vue-carousel'
+import axios from 'axios'
+
+Vue.use(VueCarousel)
+Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 
