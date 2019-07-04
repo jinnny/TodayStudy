@@ -6,42 +6,49 @@
 
 <template>
   <main class="main-content">
-    <article class="main-billboard--special">
+    <transition name="fade">
+      <div class="loading" v-if="loading">
+        <img src="../../assets/images/common/netflix_logo.svg" alt="Netflix" width="92" height="25">
+      </div>
+    </transition>
+    <article class="main-billboard--special" v-for="(movie, i) in movies.slice(0,1)" :index="i" :key="i">
       <div class="special-image-area">
-        <img src="../../assets/images/main/special_image.png" alt="" class="special__image">
+        <img :src="movie.background_image" alt="" class="special__image">
         <div class="special-image-layer layer--top"></div>
         <div class="special-image-layer layer--bottom"></div>
       </div>
-      <div class="special-text-area">
-        <h1 class="special-text__subject">
-          <img src="../../assets/images/main/special_subject.png" alt="아스달 연대기" class="subject-img">
-        </h1>
-        <div class="special-btn-area">
-          <button class="special-btn special-btn--play">
-            <font-awesome-icon icon="play" class="btn__icon"/>재생</button>
-          <button class="special-btn special-btn--zzim">
-            <font-awesome-icon icon="plus" class="btn__icon"/>내가 찜한 콘텐츠
-          </button>
+      <div class="special-text-area-wrap">
+        <div class="special-text-area">
+          <h1 class="special-text__subject">
+            <img :src="movie.large_cover_image" :alt="movie.title" class="subject-img">
+          </h1>
+          <div class="special-btn-area">
+            <button class="special-btn special-btn--play">
+              <font-awesome-icon icon="play" class="btn__icon"/>재생</button>
+            <button class="special-btn special-btn--zzim">
+              <font-awesome-icon icon="plus" class="btn__icon"/>내가 찜한 콘텐츠
+            </button>
+          </div>
+          <strong class="special-text__description special-text__description--important">매주 토요일 새로운 에피소드 공개</strong>
+          <p class="special-text__description">
+            {{movie.description_full}}
+          </p>
         </div>
-        <strong class="special-text__description special-text__description--important">매주 토요일 새로운 에피소드 공개</strong>
-        <p class="special-text__description">
-          그곳에서 모든 것이 시작됐다. 태고의 땅 아스. 권력을 향한 욕망, 새로운 사회에 대한 열망, 그리고 가슴 뛰는 사랑을 위해 치열하게 살아간 사람들이 있었다.
-        </p>
       </div>
     </article>
     <div class="main-billboard--card">
       <h2 class="card-category__title">Netflix 인기 콘텐츠</h2>
       <carousel :per-page="5" :mouse-drag="true" class="card-slide">
-        <article class="card-slide__item">
+        <article class="card-slide__item" v-for="movie in movies">
           <router-link to="/" class="card__item">
             <div class="card-thumbnail-area">
-              <img src="../../assets/images/main/card_thumbnail_01.png" alt="" class="card-thumbnail__img">
+              <img :src="movie.medium_cover_image" alt="" class="card-thumbnail__img">
             </div>
             <div class="card-text-area">
               <button><font-awesome-icon icon="play" class="btn__icon"/></button>
-              <h1 class="card__subject">지정생존자</h1>
+              <h1 class="card__subject">{{movie.title}}</h1>
               <ul class="card-category">
-                <li>스릴러</li>
+                <li>{{movie.genres}}</li>
               </ul>
             </div>
           </router-link>
@@ -57,7 +64,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlay, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Carousel, Slide } from 'vue-carousel'
-import axios from 'axios'
+// import axios from 'axios'
+import { fetchMovieList } from '../../api/index.js'
 
 library.add(faPlay, faPlus)
 
@@ -70,42 +78,76 @@ export default {
   },
   data () {
     return {
-      info: null
+      error: null,
+      movies: [],
+      loading: true,
+      fadeOut: 'fadeOut'
     }
   },
   methods: {
+    getMovie () {
+      // 영화진흥위원회
+      // axios.get('http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=89378ac880b8d6a28264d20920bdf5f2')
+      fetchMovieList()
+        .then(response => response.data.movieListResult.movieList)
+        .then(response => {
+          console.log(response)
+        })
+
+      // yts 영화정보
+      fetch('https://yts.lt/api/v2/list_movies.json?sort_by=like_count')
+        .then(response => response.json())
+        // .then(json => (console.log(json)))
+        .then(json => {
+          this.movies = json.data.movies;
+          this.loading = false
+          // console.log(vm.movies)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   },
   created () {
-    axios.get('http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=89378ac880b8d6a28264d20920bdf5f2')
-      .then(response => {
-        console.log(response)
-      })
+    this.getMovie()
   }
 }
 </script>
 
 <style scoped lang="scss">
+
   .main-content {
     position: relative;
     margin-top: -70px;
     width: 100%;
     height: 100%;
+    .loading {
+      width: 100%;
+      height: 100%;
+      background: $black;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      position: fixed;
+      font-size: .5vw;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
   /*풀스크린영역*/
   .main-billboard--special {
     width: 100%;
-    height: 80%;
+    padding-top: 42%;
     display: flex;
     flex-direction: column-reverse;
     @include clearfix;
     .special-image-area {
       width: 100%;
-      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
-      bottom: 0;
-      right: 0;
       .special__image {
         width: 100%;
         max-height: 1432px;
@@ -156,14 +198,17 @@ export default {
       }
     }
     /*텍스트부분*/
-    .special-text-area {
+    .special-text-area-wrap {
       position: absolute;
-      top: 19vh;
+      top: 0;
       left: 4vw;
-      width: 36%;
+      width: 40%;
+    }
+    .special-text-area {
+      padding-top: 10vw;
       .special-text__subject {
         .subject-img {
-          width: 90%;
+          width: 25%;
         }
       }
     }
@@ -208,6 +253,11 @@ export default {
       font-size: 1.4vw;
       line-height: 1.4;
       word-break: keep-all;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
     }
     .special-text__description--important {
       font-size: 1.6vw;
@@ -234,10 +284,9 @@ export default {
       margin-right: .25vw;
       min-width: 13vw;
       color: $white;
-      background: yellow;
       .card-thumbnail-area {
         position: relative;
-        padding: 28% 0;
+        padding: 50% 0;
         overflow: hidden;
         .card-thumbnail__img {
           width: 100%;

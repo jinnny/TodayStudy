@@ -13,7 +13,7 @@
         <!--상단메뉴-->
         <nav class="header__menu">
           <router-link to="/" class="menu__item">홈</router-link>
-          <router-link to="/" class="menu__item">TV 프로그램</router-link>
+          <router-link to="/profile" class="menu__item">TV 프로그램</router-link>
           <router-link to="/" class="menu__item">영화</router-link>
           <router-link to="/" class="menu__item">최신 등록 콘텐츠</router-link>
           <router-link to="/" class="menu__item">내가 찜한 콘텐츠</router-link>
