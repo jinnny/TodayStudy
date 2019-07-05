@@ -36,6 +36,9 @@
         </div>
       </div>
     </article>
+    <article class="card-slide__item" v-for="koreamovie in this.$store.state.koreamovies">
+      {{koreamovie.movieList[0].movieNm}}
+    </article>
     <div class="main-billboard--card">
       <h2 class="card-category__title">Netflix 인기 콘텐츠</h2>
       <carousel :per-page="5" :mouse-drag="true" class="card-slide">
@@ -48,7 +51,7 @@
               <button><font-awesome-icon icon="play" class="btn__icon"/></button>
               <h1 class="card__subject">{{movie.title}}</h1>
               <ul class="card-category">
-                <li>{{movie.genres}}</li>
+                <li>{{movie.genres[1]}}</li>
               </ul>
             </div>
           </router-link>
@@ -64,7 +67,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlay, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { Carousel, Slide } from 'vue-carousel'
-// import axios from 'axios'
 import { fetchMovieList } from '../../api/index.js'
 
 library.add(faPlay, faPlus)
@@ -88,20 +90,23 @@ export default {
     getMovie () {
       // 영화진흥위원회
       // axios.get('http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=89378ac880b8d6a28264d20920bdf5f2')
-      fetchMovieList()
-        .then(response => response.data.movieListResult.movieList)
-        .then(response => {
-          console.log(response)
-        })
+      // fetchMovieList()
+      //   .then(response => response.data.movieListResult.movieList)
+      //   .then(response => {
+      //     console.log(response)
+      //   })
+      //dispatch로 꺼내옴
+      this.$store.dispatch('FETCH_MOVIES');
 
       // yts 영화정보
       fetch('https://yts.lt/api/v2/list_movies.json?sort_by=like_count')
         .then(response => response.json())
         // .then(json => (console.log(json)))
         .then(json => {
+          console.log(json);
           this.movies = json.data.movies;
-          this.loading = false
-          // console.log(vm.movies)
+          this.loading = false;
+          console.log(this.movies)
         })
         .catch((error) => {
           console.log(error)
@@ -115,7 +120,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
   .main-content {
     position: relative;
     margin-top: -70px;
@@ -286,7 +290,7 @@ export default {
       color: $white;
       .card-thumbnail-area {
         position: relative;
-        padding: 50% 0;
+        padding: 70% 0;
         overflow: hidden;
         .card-thumbnail__img {
           width: 100%;

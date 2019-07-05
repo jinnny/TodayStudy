@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/contents/Main'
 import Profile from '@/components/contents/Profile'
+import Login from '@/components/contents/Login'
 
 Vue.use(Router)
 
@@ -23,6 +24,14 @@ export default new Router({
       name: 'Profile',
       component: Profile,
       props: true,
+      meta: {
+        plainLayout: false
+      }
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
       meta: {
         plainLayout: false
       }

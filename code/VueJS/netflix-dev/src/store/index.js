@@ -6,11 +6,30 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { fetchMovieList } from "../api";
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    movies: []
+    koreamovies: []
+  },
+  mutations: {
+    SET_MOVIES(state, koreamovies) {
+      state.koreamovies = koreamovies;
+    }
+  },
+  actions: {
+    FETCH_MOVIES(context) {
+      fetchMovieList()
+        .then(response => {
+          console.log(response);
+          //mutation에 데이터 넘길떄 commit() 필요
+          context.commit('SET_MOVIES' , response.data);
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
 });
