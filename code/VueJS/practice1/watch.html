@@ -1,0 +1,44 @@
+<!--
+  ~ Created by Eunjin Yang on 19. 7. 23 오후 6:15
+  ~ Github : http://github.com/jinny920311
+  ~ Copyright (c) 2019. All rights reserved.
+  -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    {{ num }}
+    <button v-on:click="addNum">increase</button>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        num: 10
+      },
+      watch: {
+        //바뀔 속성: 함수
+        num: function () {
+          this.logText();
+        }
+      },
+      methods: {
+        addNum: function () {
+          this.num = this.num + 1;
+        },
+        logText: function () {
+          console.log('changed');
+        }
+      },
+    })
+  </script>
+</body>
+</html>

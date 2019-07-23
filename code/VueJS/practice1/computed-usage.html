@@ -1,0 +1,40 @@
+<!--
+  ~ Created by Eunjin Yang on 19. 7. 23 오후 6:27
+  ~ Github : http://github.com/jinny920311
+  ~ Copyright (c) 2019. All rights reserved.
+  -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .warning {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!--<p v-bind:class="{ 클래스네임: 조건 }">Hello</p>-->
+    <p v-bind:class="errorTextColor">Hello</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        cname: 'blue-text',
+        inError: false
+      },
+      //computed 속성은 클래스바인딩에 사용할 수 있음.
+      computed: {
+        errorTextColor: function () {
+          return this.inError ? 'warning': null;
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!--
+  ~ Created by Eunjin Yang on 19. 7. 23 오후 3:07
+  ~ Github : http://github.com/jinny920311
+  ~ Copyright (c) 2019. All rights reserved.
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--<app-header v-bind:프롭스 속성이름="상위컴포넌트의 데이터 이름"></app-header>-->
+    <app-header v-bind:propsdata="num"></app-header>
+    <app-content v-on:pass="deliverNum"></app-content>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var appHeader = {
+      template: '<div>header</div>',
+      props: ['propsdata']
+    }
+    var appContent = {
+      template: '<div>content<button v-on:click="passNum">pass</button></div>',
+      methods: {
+        passNum: function () {
+          this.$emit('pass', 10);
+        }
+      }
+    }
+    new Vue({
+      el: '#app',
+      components: {
+        'app-header': appHeader,
+        'app-content': appContent
+      },
+      data: {
+        num: 0
+      },
+      methods: {
+        deliverNum: function (value) {
+          this.num = value;
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!--
+  ~ Created by Eunjin Yang on 19. 7. 23 오후 6:09
+  ~ Github : http://github.com/jinny920311
+  ~ Copyright (c) 2019. All rights reserved.
+  -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="logText">click</button>
+    <input type="text" v-on:keyup="logText">
+    <!--이벤트 modifier(enter)-->
+    <input type="text" v-on:keyup.enter="logText">
+    <button v-on:click="logText">add</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+        logText: function () {
+          console.log('clicked');
+        }
+      }
+    })
+  </script>
+</body>
+</html>

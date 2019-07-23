@@ -1,0 +1,58 @@
+<!--
+  ~ Created by Eunjin Yang on 19. 7. 23 오후 2:50
+  ~ Github : http://github.com/jinny920311
+  ~ Copyright (c) 2019. All rights reserved.
+  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>event emit</title>
+</head>
+<body>
+  <div id="app">
+    {{ numb }}
+    <!--<app-header v-on:하위컴포넌트에서 발생한 이벤트이름(emit에 선언된이름)="상위 컴포넌트의 메서드 이름"></app-header>-->
+    <app-header v-on:pass="logText"></app-header>
+    <app-content v-on:add="countAdd"></app-content>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var appHeader = {
+      template: '<button v-on:click="passEvent">Click me</button>',
+      methods: {
+        passEvent: function () {
+          this.$emit('pass');
+        }
+      }
+    }
+    var appContent = {
+      template: '<button v-on:click="addNumber">add</button>',
+      methods: {
+        addNumber: function () {
+          this.$emit('add');
+        }
+      }
+    }
+    new Vue({
+      el: '#app',
+      components: {
+        'app-header': appHeader,
+        'app-content': appContent
+      },
+      methods: {
+        logText: function () {
+          console.log('hi');
+        },
+        countAdd: function () {
+          // console.log(++this.numb);
+          this.numb = this.numb + 1;
+        }
+      },
+      data: {
+        numb: 10
+      }
+    });
+  </script>
+</body>
+</html>

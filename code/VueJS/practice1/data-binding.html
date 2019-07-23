@@ -1,0 +1,46 @@
+<!--
+  ~ Created by Eunjin Yang on 19. 7. 23 오후 5:00
+  ~ Github : http://github.com/jinny920311
+  ~ Copyright (c) 2019. All rights reserved.
+  -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    <!--뷰 디렉티브 v-bind 접두어로 v 붙어있는경우..-->
+    <p v-bind:id="uuid" v-bind:class="name">{{ number }}</p>
+    <!--데이터 바인딩 {{}}-->
+    <p>{{ doublenNumber }}</p>
+
+    <div v-if="loading">Loading..</div>
+    <div v-else>Test user has been logged in</div>
+
+    <input type="text" v-model="message">
+    <p>{{ message }}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        string: 'hi',
+        number: 10,
+        uuid: 'abc1234',
+        name: 'text-blue',
+        loading: true,
+        message: ''
+      },
+      computed: {
+        doublenNumber: function () {
+          return this.number * 2;
+        }
+      }
+    })
+  </script>
+</body>
+</html>

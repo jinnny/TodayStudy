@@ -1,0 +1,43 @@
+<!--
+  ~ Created by Eunjin Yang on 19. 7. 23 오후 6:20
+  ~ Github : http://github.com/jinny920311
+  ~ Copyright (c) 2019. All rights reserved.
+  -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div id="app">
+    {{ num }}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        num: 10
+      },
+      computed: {
+        doubleNumber: function () {
+          return this.num * 2;
+        }
+      },
+      //watch의 인자는 newValue, oldValue 두가지를 갖는다
+      watch: {
+        num: function (newValue) {
+          this.fetchUserByNumber(newValue);
+        }
+      },
+      methods: {
+        fetchUserByNumber: function (num) {
+          console.log(num);
+        }
+      }
+    })
+  </script>
+</body>
+</html>
