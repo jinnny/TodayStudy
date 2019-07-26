@@ -21,12 +21,20 @@ import './Movie.css';
 //     }
 // }
 
-// dump component 단순 출력할때 사용. (props와 return만 가짐)
-function Movie({title, poster}){
+// dump component 단순 출력할때 사용. (props와 return만 가짐: return 이 다!)
+function Movie({title, poster, genres, synopsis}){
    return ( 
-        <div>
-            <MoviePoster poster={poster}/>
-            <h1>{title}</h1>
+        <div className="Movie">
+            <div className="Movie__Columns">
+                <MoviePoster poster={poster} alt={title}/>
+            </div>
+            <div className="Movie__Columns">
+                <h1>{title}</h1>
+                <div className="Movie__Genres">
+                    {genres.map((genre, index) => <MovieGenre genre={genre} key={index} />)}
+                </div>
+                <p className="Movie__Synopsis">{synopsis}</p>
+            </div>
         </div>
     )
 }
@@ -47,19 +55,31 @@ function Movie({title, poster}){
 // }
 
 // dump component 단순 출력할때 사용. (props와 return만 가짐)
-function MoviePoster({poster}) {
+function MoviePoster({poster, alt}) {
     return (
-        <img src={poster} alt=""/>
+        <img src={poster} alt={alt} title={alt} className="Movie__Poster"/>
+    )
+}
+
+function MovieGenre({genre}) {
+    return (
+        <mark className="Movie__Genre">{genre} </mark>
     )
 }
 
 Movie.propTypes = {
     title: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired
+    poster: PropTypes.string.isRequired,
+    genres: PropTypes.array.isRequired,
+    synopsis: PropTypes.string.isRequired
 }
 
 MoviePoster.propTypes = {
     poster: PropTypes.string.isRequired
+}
+
+MovieGenre.prototype = {
+    genre: PropTypes.string.isRequired
 }
 
 
