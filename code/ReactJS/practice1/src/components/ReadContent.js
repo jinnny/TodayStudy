@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-class Content extends Component {
+class ReadContent extends Component {
     render() {
-        console.log('content render');
+        console.log('ReadContent render');
 
       return (
         // 하나의 최상위 태그만 사용해야함
@@ -14,4 +14,4 @@ class Content extends Component {
     }
   }
 
-  export default Content;
+  export default ReadContent;

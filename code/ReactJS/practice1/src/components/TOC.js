@@ -3,6 +3,12 @@ import React, { Component } from 'react';
 // redux 없이는
 // 하위에서 상위컴포넌트를 명령할때는 이벤트를 이용, 상위컴포넌트에서 하위컴포넌트로 명령할땐 props
 class TOC extends Component {
+  shouldComponentUpdate(newProps, newState) {
+    if(newProps.data === this.props.data){
+      return false;
+    }
+    return true;
+  }
     render() {
         console.log('toc render');
         // component 안에서 본인이 받은 props의 값을 변화시키는것은 금지되어있음(읽을수만있음), component의 밖에선 무관.
