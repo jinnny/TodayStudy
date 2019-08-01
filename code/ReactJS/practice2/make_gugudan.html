@@ -35,11 +35,13 @@
                             value: '',
                         };
                     });
+                    this.input.focus();
                 } else {
                     this.setState({
                         result: '틀렸습니다.',
                         value: '',
                     })
+                    this.input.focus();
                 }
 
             }
@@ -49,7 +51,9 @@
                     value: e.target.value
                 })
             }
-            render(){
+            
+            _onRefInput = (c) => {this.input = c;}
+             render(){
                 // return e('button', { onClick: () => { this.setState({liked: true})} }, 
                 // this.state.liked === true ? 'Like': 'Unlike' );
                 return (
@@ -57,7 +61,7 @@
                     <React.Fragment>
                         <div>{this.state.first} 곱하기 {this.state.second}는? </div>
                         <form onSubmit={this._onSubmit}>
-                            <input type="number" name="number" onChange={this._onChange} value={this.state.value}/>
+                            <input ref={this._onRefIput} type="number" name="number" onChange={this._onChange} value={this.state.value}/>
                             <button type="submit">입력</button>    
                         </form>
                         <div>{this.state.result} </div>

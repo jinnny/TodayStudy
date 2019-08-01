@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React로 구구단 만들기</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+        // class GuGuDan extends React.Component {
+        //     constructor(props){
+        //         super(props);
+        //         this.state = {
+        //             first: Math.ceil(Math.random() * 9 ),
+        //             second: Math.ceil(Math.random() * 9 ),
+        //             value: '',
+        //             result: '',
+        //             answer: '',
+        //         }
+        //     }
+        //     _onSubmit = (e) => {
+        //         e.preventDefault();
+        //         if (parseInt(this.state.value) === this.state.first * this.state.second) {
+        //             // 예전 값으로 새로운 state값을 만들때는 위와 같이 return 해줘야함.
+        //             // setstate 안에 this.state를 쓸경우 함수형으로 사용해야함(아래처럼)
+        //             this.setState((prevState) => {
+        //                 return {
+        //                     result: '정답입니다.' + prevState.value,
+        //                     first: Math.ceil(Math.random() * 9 ),
+        //                     second: Math.ceil(Math.random() * 9 ),
+        //                     value: '',
+        //                 };
+        //             });
+        //             this.input.focus();
+        //         } else {
+        //             this.setState({
+        //                 result: '틀렸습니다.',
+        //                 value: '',
+        //             })
+        //             this.input.focus();
+        //         }
+
+        //     }
+        //     // 빼서 사용하는 것은 화살표 함수써야함. 아니면 this가 달라짐.
+        //     _onChange = (e) => {
+        //         this.setState({
+        //             value: e.target.value
+        //         })
+        //     }
+            
+        //     _onRefInput = (c) => {this.input = c;}
+        //      render(){
+        //         // return e('button', { onClick: () => { this.setState({liked: true})} }, 
+        //         // this.state.liked === true ? 'Like': 'Unlike' );
+        //         return (
+        //             // div로 한번 더 안감싸고싶을때 아래로 하면됨.
+        //             <React.Fragment>
+        //                 <div>{this.state.first} 곱하기 {this.state.second}는? </div>
+        //                 <form onSubmit={this._onSubmit}>
+        //                     <input ref={this._onRefIput} type="number" name="number" onChange={this._onChange} value={this.state.value}/>
+        //                     <button type="submit">입력</button>    
+        //                 </form>
+        //                 <div>{this.state.result} </div>
+        //             </React.Fragment>
+        //         );
+        //      }
+        //     }
+
+        // setState, ref 를 안쓰는 경우 자주 사용.(원래 -> 차후에 해당 부분도 쓸수 있게해줌 Hooks)
+        const GuGuDan = () => {
+            // state, setState 세트라 보면됨.(각각 선언해서 사용.)
+            // 비구조화할당..
+            const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+            const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+            const [value, setValue] = React.useState('');
+            const [result, setResult] = React.useState('');
+            const inputRef = React.useRef(null);
+
+            const _onChangeInput = (e) => {
+                setValue(e.target.value);
+            }
+
+            const _onSubmitForm = (e) => {
+                e.preventDefault();
+                if (parseInt(value) === first * second) {
+                    setResult('정답' + value );
+                    // 옛날 state를 활용하는 경우에는 hooks 도 class형처럼 함수를 사용한다.
+                    // setResult((prevResult) => '정답' + prevResult );
+                    // ex) setCounter((c) = > c + 1 )
+                    setFirst(Math.ceil(Math.random() * 9 ));
+                    setSecond(Math.ceil(Math.random() * 9 ));
+                    setValue('');
+                    inputRef.current.focus();
+                    // setState를 모아서 한번에 처리함(비동기로 처리함) 그래서 render()가 한번만 일어남.
+                } else {
+                    setResult('틀렸습니다.')
+                    setValue('');
+                    inputRef.current.focus();
+                }
+            }
+
+            return (
+                <React.Fragment>
+                    <p>{first} 곱하기 {second} 는?</p>
+                    <form onSubmit={_onSubmitForm}>
+                        <input onChange={_onChangeInput} value={value} ref={inputRef} />
+                        <button className="submit-btn" labelFor="">입력!</button>
+                    </form>
+                    <div id="result">{result}</div>
+                </React.Fragment>
+            )
+        }
+
+
+
+
+    </script>
+    <script type="text/babel">
+        // ReactDOM.render(e(LikeButton), document.querySelector('#root'))
+        ReactDOM.render(<GuGuDan />, document.querySelector('#root'))
+    </script>
+  </body>
+</html>
