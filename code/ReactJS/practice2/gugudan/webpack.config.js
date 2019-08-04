@@ -1,25 +1,23 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-    name: 'word-replay-setting',
     mode: 'development',
-    node: { global: true }, //실서비스 production
     devtool: 'eval',
-    // 아래거를 이용하면 entry 쪽에 확장자명을 붙이지 않아도 알아서 찾아옴
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.jsx', '.js']
     },
 
     entry: {
-        app: ['./client']
-// 입력
+        app: './client',
     },
-    
+
     module: {
         rules: [{
-            test: /\.jsx?/,
+            test: /\.jsx?$/,
             loader: 'babel-loader',
             options: {
+                // 옵션에 따라 코드를 아래처럼 사용가능(배열로만든 뒤 객체를 뒤에 적음)
                 presets: [
                     ['@babel/preset-env', {
                     targets: {
@@ -29,19 +27,15 @@ module.exports = {
                     debug: true,
                 }], 
                 '@babel/preset-react'],
-                plugins: [
-                    '@babel/plugin-proposal-class-properties',
-                    'react-hot-loader/babel'
-                ],
+                plugins: []
             }
-        }]
+        }],
     },
-
+    plugins: [
+        new webpack.LoaderOptionsPlugin({debug: true})
+    ],
     output: {
-        // 실제 dist 경로가 됨.(path.join 은 자동으로 만들어줌 경로)
-        path: path.join(__dirname, 'dist'),
         filename: 'app.js',
-        publicPath: '/dist/'
-// 출력
+        path: path.join(__dirname, 'dist')
     }
-};
+}

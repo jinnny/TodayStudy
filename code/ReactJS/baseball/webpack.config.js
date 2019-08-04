@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    name: 'word-replay-setting',
+    name: 'baseball-setting',
     mode: 'development',
     node: { global: true }, //실서비스 production
     devtool: 'eval',
