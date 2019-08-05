@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React&Express</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+            {/*
+        class Codelab extends React.Component {
+                기본 props 적용
+            static defaultProps = {
+                name: '하이'
+            }
+             render(){
+                 let text = 'jin';
+                 let style = {
+                     backgroundColor: 'pink'
+                 }
+                return (
+                    <div>
+                        {/* 주석입니다
+                       <h1 style={style}>반가워 {text}</h1>
+                       <p>{this.props.name}</p>
+                       <h2>{this.props.number}</h2>
+                       <p>{this.props.children}</p>
+                    </div>
+                );
+             }
+            }
+        */}
+
+        {/*함수형 컴포넌트*/} 
+            const Codelab = ({ name }) => {
+                return (
+                    <div>
+                        <h1>반가워</h1>
+                        <p>{this.props.name}</p>
+                        <h2>{this.props.number}</h2>
+                        <p>{this.props.children}</p>
+                    </div>
+                )
+            };
+        
+
+            class App extends React.Component {
+                render () {
+                    return (
+                        <Codelab name="mihi">뭐임마?</Codelab>
+                    )
+                }
+            }
+    </script>
+    <script type="text/babel">
+        // ReactDOM.render(e(LikeButton), document.querySelector('#root'))
+        ReactDOM.render(<App />, document.querySelector('#root'))
+    </script>
+  </body>
+</html>
