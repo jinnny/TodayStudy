@@ -26,7 +26,7 @@ componentDidMount()
 
 shouldComponentUpdate()
 업데이트를 막아줄 수 있는 함수  
-props 변화가 없으면 업데이트 막음.(불필요한 랜더를 안하게 막음: 성능최적화를위해)
+props 변화가 없으면 업데이트 막음.(불필요한 랜더를 안하게 막음: 성능최적화를위해) true, false 값을 리턴할 수 있음.(false 면 render 실행하지 않음.)
 
 render()
 

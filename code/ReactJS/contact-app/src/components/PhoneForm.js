@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 class PhoneForm extends Component {
+    // input = null
+    // 16.3버전 이상에서만 아래처럼 가능
+    input = React.createRef()
+
     state = {
         name: '',
         phone: ''
@@ -13,11 +17,18 @@ class PhoneForm extends Component {
     }
     _onSubmitForm = (e) => {
         e.preventDefault();
-        console.log(e.target.name.value)
         this.props._phoneForm(
+            // this.state
             this.state.name,
             this.state.phone
-        )   
+        )
+        this.setState({
+            name: '',
+            phone: ''
+        })
+        // this.input.focus();
+        // 16.3버전 이상에서만 아래처럼 가능
+        this.input.current.focus();
     }
     render() {
         return (
@@ -27,6 +38,9 @@ class PhoneForm extends Component {
                     placeholder="이름"
                     onChange={this._handleChange} 
                     value={this.state.name}
+                    // ref={ref => this.input = ref}
+                    // 16.3버전 이상에서만 아래처럼 가능
+                    ref={this.input}
                     />
                 <input 
                     name="phone"
@@ -34,8 +48,8 @@ class PhoneForm extends Component {
                     onChange={this._handleChange}
                     value={this.state.phone}
                     />
-                {this.state.name}<br/>
-                {this.state.phone}
+                {/* {this.state.name}<br/>
+                {this.state.phone} */}
                 <button>submit</button>
             </form>
         );
