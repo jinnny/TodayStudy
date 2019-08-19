@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS Transform& Transition</title>
+  <link rel="stylesheet" href="https://jinnny.github.io/publish_source/reset.css">
+  <style>
+    .box-container {
+      display: flex;
+    }
+    .box {
+      width: 50px;
+      height: 100px;
+      border: 2px solid black;
+      background: rgba(255,255, 0, 0.7);
+      /* transition 으로 움직임 조절 */
+      transition: all 1s ease-in-out;
+    }
+    .box:hover {
+      /* transform: scale(2) rotate(15deg); */
+      /* transform: skewY(30deg); */
+      /* transform: translate(30px, 10px); */
+      /* transform: translateX(30px); */
+      /* transform: scale(2); */
+
+      /* trasnform 에 대한 기준점 잡기(수치로도 가능) */
+      /* transform-origin: left top; */
+      /* transform-origin: 30% 20%; */
+
+
+      width: 200px;
+      background: pink;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS Transform</h1>
+  <p>모든 국민은 헌법과 법률이 정한 법관에 의하여 법률에 의한 재판을 받을 권리를 가진다. 대통령은 국무총리·국무위원·행정각부의 장 기타 법률이 정하는 공사의 직을 겸할 수 없다.
+      국가는 농·어민과 중소기업의 자조조직을 육성하여야 하며, 그 자율적 활동과 발전을 보장한다. 탄핵소추의 의결을 받은 자는 탄핵심판이 있을 때까지 그 권한행사가 정지된다. 
+  </p>
+  <div class="box-container">
+    <div class="box">a</div>
+    <div class="box">b</div>
+    <div class="box">c</div>
+    <div class="box">d</div>
+    <div class="box">e</div>
+  </div>
+  <p>
+      모든 국민은 헌법과 법률이 정한 법관에 의하여 법률에 의한 재판을 받을 권리를 가진다. 대통령은 국무총리·국무위원·행정각부의 장 기타 법률이 정하는 공사의 직을 겸할 수 없다.
+      국가는 농·어민과 중소기업의 자조조직을 육성하여야 하며, 그 자율적 활동과 발전을 보장한다. 탄핵소추의 의결을 받은 자는 탄핵심판이 있을 때까지 그 권한행사가 정지된다.
+  </p>
+</body>
+</html>

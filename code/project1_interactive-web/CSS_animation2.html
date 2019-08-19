@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS animation</title>
+  <style>
+    @keyframes avatar-ani {
+      100% {
+        background-position: -1500px 0;
+      }
+    }
+    .avatar {
+      width: 150px;
+      height: 220px;
+      /* 여기서 / 는 background-position과 background-size 구분 */
+      /* 축약형에 background-size를 사용할 경우, position 값을 무조건 입력하고 그 뒤에 /를 추가해야함 */
+      background: url('animation-sample.png') no-repeat 0 0 / auto 220px;
+      animation: avatar-ani 1s infinite steps(10);
+    }
+    .avatar:hover {
+      animation-play-state: paused;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Animation</h1>
+  <div class="avatar"></div>
+</body>
+</html>

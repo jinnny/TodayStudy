@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS animation</title>
+  <style>
+    @keyframes  sample-ani {
+      0% {
+        transform: translate(0,0)
+      }
+      50% {
+        background: pink;
+        transform: translate(300px, 0)
+      }
+      100% {
+        transform: translate(400px, 500px)
+      }
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      background: yellow;
+      border: 2px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* animation: sample-ani 2s linear infinite alternate; */
+      animation: sample-ani 2s linear forwards;
+    }
+    /* 애니메이션 일시정지 */
+    .box:hover {
+      animation-play-state: paused;
+    }
+    input {
+      border: 2px solid black;
+    }
+    .msg {
+      color: blue;
+    }
+    input:placeholder-shown {
+      border-color: gray;
+    }
+    input:placeholder-shown + .msg {
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Animation</h1>
+  <div class="box">BOX</div>
+  <!-- placeholder-shown -->
+  <input type="text" placeholder="input this">
+  <p class="msg">메롱</p>
+</body>
+</html>
