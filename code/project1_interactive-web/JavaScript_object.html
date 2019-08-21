@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Object</title>
+</head>
+<body>
+  <h1>Object</h1>
+  
+  <script>
+    const person = {};
+    // 속성, 프로퍼티 property
+    person.name = '일분이';
+    person.age = 10;
+    // 메소드, method(함수인 속성)
+    person.introduce = () => {
+      console.log('안뇽하신가')
+    }
+    person.introduce();
+
+    const person2 = {
+      name: '일분이',
+      age: 10,
+      introduce: () => {
+        console.log('졸려')
+      }
+    }
+    console.log(person2)
+  </script>
+</body>
+</html>

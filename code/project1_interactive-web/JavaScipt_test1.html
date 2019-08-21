@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://jinnny.github.io/publish_source/reset.css">
+  <style>
+    .characters {
+      background: skyblue;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .special {
+      border: 2px dashed red;
+    }
+    .ilbuni {
+      width: 100px;
+      cursor: pointer;
+    }
+    .ilbuni img {
+      width: 100%;
+    }
+    .stage {
+      overflow: hidden;
+      position: relative;
+      width: 100vw;
+      height: 75vw;
+      background: yellow;
+    }
+    @keyframes moving {
+      0% {
+        transform: translateX(0)
+      }
+      100% {
+        transform: translateX(90vw)
+      }
+    }
+    .ilbun {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      background-size: contain;
+      animation: moving 3s infinite alternate;
+    }
+    .ilbun:nth-of-type(1){
+      left: 5%;
+      bottom: 5%;
+      background-image: url(images/ilbuni_0.png);
+      animation-duration: 2s;
+    }
+    .ilbun:nth-of-type(2){
+      left: 10%;
+      bottom: 3%;
+      background-image: url(images/ilbuni_1.png);
+      animation-duration: 3s;
+    }
+    .ilbun:nth-of-type(3){
+      left: 7%;
+      bottom: 10%;
+      background-image: url(images/ilbuni_2.png);
+      animation-duration: 4s;
+    }
+    .ilbun:nth-of-type(4){
+      left: 15%;
+      bottom: 7%;
+      background-image: url(images/ilbuni_3.png);
+      animation-duration: 1s;
+    }
+  </style>
+   <script>
+    /*  load 와 DOMContentLoaded 의 차이점은 load는 이미지까지 전체가 로드 되었을때 실행되는것이고
+    DOMContentLoaded는 DOM구조만 로드 되면 실행됨(실행시점이 더욱 빠름 IE9이상지원)
+    */ 
+    //  window.addEventListener('DOMContentLoaded', () => {
+    //   const il = document.querySelector('.ilbuni.c');
+    //   console.log(il);
+    //   const clickInbuniHandler = () => {
+    //     il.classList.toggle('special');
+    //   }  
+    //   il.addEventListener('click', clickInbuniHandler);
+    //  })
+    </script>
+</head>
+<body>
+  <!-- <div class="characters">
+    <div class="ilbuni a">
+      <img src="images/ilbuni_0.png" alt="일분이">
+    </div>
+    <div class="ilbuni b">
+      <img src="images/ilbuni_1.png" alt="일분이">
+    </div>
+    <div class="ilbuni c">
+      <img src="images/ilbuni_2.png" alt="일분이">
+    </div>
+    <div class="ilbuni d">
+      <img src="images/ilbuni_3.png" alt="일분이">
+    </div>
+  </div> -->
+  <div class="stage">
+    <div class="ilbun"></div>
+    <div class="ilbun"></div>
+    <div class="ilbun"></div>
+    <div class="ilbun"></div>
+  </div>
+  <script>
+
+    (()=> {
+      const stage = document.querySelector('.stage');
+
+      const ilbunRemove = (e) => {
+        if(stage != e.target) {
+          console.log(this, e.target);
+          stage.removeChild(e.target);
+        }
+      }
+
+
+      stage.addEventListener('click', ilbunRemove);
+
+
+    })()
+
+    // 전역으로 사용하지 않기 위해 익명함수화 시킴
+    // (() => {
+    //   const il = document.querySelector('.ilbuni.c');
+    //   const characters = document.querySelector('.characters');
+    //   console.log(il);
+
+    //   const clickInbuniHandler = (e) => {
+    //     console.log(e.target)
+    //   }
+
+    //   characters.addEventListener('click', clickInbuniHandler);
+    // })()
+      
+  </script>
+</body>
+</html>

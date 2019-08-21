@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://jinnny.github.io/publish_source/reset.css">
+  <style>
+    .doors {
+      width: 100vw;
+      height: 100vh;
+      background: #333333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .door-area {
+      width: 150px;
+      height: 200px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+    }
+    .door-area:nth-child(2) .front-door {
+      background-color: green;
+    }
+    .door-area:nth-child(3) .front-door {
+      background-color: goldenrod;
+    }
+    .door {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .front-door {
+      background-color: red;
+      z-index: 2;
+      transition: all 1s;
+      transform: perspective(1000px) rotateY(0deg);
+      transform-origin: 0% 50%;
+    }
+    .back-door {
+      background-color: black;
+    }
+    @keyframes showImg {
+      100% {
+        transform: translate3d(0%, 0, 0)
+      }
+    }
+    .door-img-area {
+      z-index: 1;
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding-bottom: 1rem;
+    }
+    .door-img-area .door-img {
+      width: 90px;
+      transform: translate3d(100%, 0, 0);
+      transition: 2s;
+    }
+    /* .door-area:hover .front-door {
+      transform: perspective(1000px) rotateY(-100deg);
+    }
+    .door-area:hover .door-img {
+      animation: showImg 2s;
+    } */
+    .door-area.open .front-door {
+      transform: perspective(800px) rotateY(-110deg);
+    }
+    .door-area.open .door-img {
+      transform: translate3d(0, 0, 0);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="doors">
+    <div class="door-area">
+      <div class="door front-door"></div>
+      <div class="door-img-area">
+        <img src="images/ilbuni_0.png" alt="" class="door-img">
+      </div>
+      <div class="door back-door"></div>
+    </div>
+    <div class="door-area">
+      <div class="door front-door"></div>
+      <div class="door-img-area">
+        <img src="images/ilbuni_1.png" alt="" class="door-img">
+      </div>
+      <div class="door back-door"></div>
+    </div>
+    <div class="door-area">
+        <div class="door front-door"></div>
+        <div class="door-img-area">
+          <img src="images/ilbuni_2.png" alt="" class="door-img">
+        </div>
+        <div class="door back-door"></div>
+      </div>
+  </div>
+</body>
+   <script>
+   (()=> {
+    const doors = document.querySelector('.doors');
+    const door = document.querySelectorAll('.door-area');
+    const targetParent = e.target.parentNode;
+
+    // 클릭하면 문이 열리고, 다른문을 클릭하면 기존 문이 닫히고, 열린문을 다시 클릭하면 계속 열려있음.
+    const doorOpen = (e) => {
+      // 클릭하면 문이 열리고
+        for ( let i = 0; i < door.length; i++ ) {
+          console.log(targetParent, door[0])
+          if(targetParent.classList.contains('door-area') ){
+            targetParent.classList.add('open');
+            /* 클릭한 타겟의 부모노드(.door-area)와 .door-area의 [i] 값이 같지않다면
+              (이미 열린문 말고 다른문을 클릭한다면),*/
+              if ( targetParent !== door[i] ) {
+              // door[i]의 클래스에서 open 을 삭제
+              door[i].classList.remove('open')
+              // 클릭한 타겟의 부모노드(.door-area)와 .door-area의 [i] 값이 같다면 open 유지
+              } else {
+            }
+          }
+        }
+      }
+
+     doors.addEventListener('click', doorOpen);
+
+   })()
+   </script>
+</html>
