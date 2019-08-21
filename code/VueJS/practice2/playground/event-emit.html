@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 하위->상위 로 통신하는 방식-> event -->
+    <!-- <app-header v-on:하위컴포넌트에서 발생한이벤트이름="상위 컴포넌트의 메서드 이름"></app-header> -->
+    <app-header v-on:pass="logText"></app-header>
+    <!-- <app-content v-bind:하위컴포넌트의프롭스이름="상위컴포넌트의 데이터 이름" v-on:add="addText"></app-content> -->
+    <app-content v-bind:propsdata="num" v-on:add="addText"></app-content>
+    {{ num }}
+
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const appHeader = {
+      template: '<button v-on:click="passEvent">click me</button>',
+      methods: {
+        passEvent: function() {
+          this.$emit('pass');
+        }
+      }
+    }
+    const appContent = {
+      template: '<button v-on:click="addNum">add</button>',
+      methods: {
+        addNum: function() {
+          this.$emit('add')
+        }
+      },
+      props: ['propsdata']
+    }
+    new Vue({
+      el: '#app',
+      components: {
+        'app-header': appHeader,
+        'app-content': appContent
+      },
+      methods: {
+        logText: function() {
+          console.log('hi')
+        },
+        addText: function() {
+          this.num = this.num + 1;
+          console.log(this.num)
+        }
+      },
+      data: {
+        num: 10
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 해당 화면의 컴포넌트 뿌려주는 부분 -->
+    <router-view></router-view>
+    <router-link to="/login">login</router-link>
+    <router-link to="/main">main</router-link>
+  </div>
+  
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  
+  <script>
+
+    const LoginComponent = {
+      template: '<div>login</div>'
+    }
+
+    const MainComponent = {
+      template: '<main>main</main>'
+    }
+
+    const router = new VueRouter({
+      mode: 'history',
+      // 페이지의 라우팅 정보(배열형식으로 담김)
+      routes: [
+        {
+          // 페이지의 url 이름
+          path: '/login',
+          // 해당 url에서 표시될 컴포넌트
+          component: LoginComponent
+        },
+        {
+          path: '/main',
+          component: MainComponent
+        }
+      ]
+    });
+
+    new Vue({
+      el: '#app',
+      router,
+      components: {
+
+      }
+    })
+  </script>
+</body>
+</html>

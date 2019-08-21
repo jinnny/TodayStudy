@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 같은 레벨일 경우 바로 데이터 전달이 불가능해서 상위 레벨로 전달해서 상위에서 다른 하위레벨로 전달 -->
+  <div id="app">
+    {{ str }}
+    <!-- <app-header v-bind:하위컴포넌트프롭스속성이름="상위컴포넌트데이터이름"></app-header> -->
+    <app-header v-bind:propsdata="num"></app-header>
+    <!-- <app-content v-on:하위컴포넌트이벤트="상위컴포넌트의 이벤트"></app-content> -->
+    <app-content v-on:pass="upNumber"></app-content>
+    {{ num }}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+ 
+  <script>
+    const appHeader = {
+      template: '<header>header</header>',
+      props: ['propsdata']
+    }
+
+    const appContent = {
+      template: '<article>article<button v-on:click="passNum">pass</button></article>',
+      methods: {
+        passNum: function() {
+          // 넘길값. 상위컴포넌트이벤트의 value 값으로 받아질 예정.
+          this.$emit('pass', 10)
+        }
+      }
+    }
+
+
+    new Vue({
+      el: '#app',
+      components: {
+        'app-header': appHeader,
+        'app-content': appContent
+      },
+      data: {
+        str: 'hi',
+        num: 0,
+      },
+      methods: {
+        upNumber: function(value) {
+          this.num = value;
+        }
+      }
+    })
+  </script>
+</body>
+</html>
