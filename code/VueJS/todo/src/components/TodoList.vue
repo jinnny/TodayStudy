@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ul>
+    <transition-group name="list" tag="ul">
       <li class="shadow" 
-        v-for="(todoItem, index) in todoItems" 
+        v-for="(todoItem, index) in this.$store.state.todoItems" 
         v-bind:key="todoItem.item"
         >
         <i 
@@ -20,36 +20,23 @@
           <i class="fas fa-trash"></i>
         </button>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      todoItems: []
-    }
-  },
-  created() {
-    if(localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length; i ++) {
-        if(localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-          // this.todoItems.push(localStorage.key(i));
-        }
-      }
-    }
-  },
+  // props: {
+  //   propsdata: Array
+  // },
   methods: {
     removeTodo (todoItem, index) {
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1);
+      this.$store.commit('removeOneItem', {todoItem, index})
+      // this.$emit('removeTodoItem', todoItem, index)
     },
     toggleComplete (todoItem, index) {
-      todoItem.completed = !todoItem.completed;
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
+      this.$store.commit('toggleCompleteOneItem', {todoItem, index})
+      // this.$emit('toggleCompleteItem', todoItem, index)
     }
   }
 }
@@ -93,6 +80,14 @@ ul {
     margin-left: auto;
     color: red;
   }
+}
+// 리스트 트랜지션
+.list-enter-active, .list-leave-active {
+  transition: all 0.5s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 </style>

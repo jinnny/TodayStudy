@@ -4,29 +4,57 @@
     <button v-on:click="addTodo" class="addContainer">
       <i class="fas fa-plus addBtn"></i>
     </button>
+    <!-- use the modal component, pass in the prop -->
+    <Modal v-if="showModal" @close="showModal = false">
+      <!--
+        you can use custom content here to overwrite
+        default content
+      -->
+      <!-- slot 은 component 마다 재정의해서 사용할 수 있음 -->
+      <h3 slot="header">
+        경고!
+        <i class="fas fa-times cloaseModalBtn"
+          @click="showModal = false"
+        ></i>
+      </h3>
+      <p slot="body">
+        내용을 입력해주세요.
+      </p>
+      <footer slot="footer">
+        copyright
+      </footer>
+    </Modal>
   </div>
 </template>
 
 <script>
+import Modal from './common/Modal.vue';
+
 export default {
   data () {
     return {
-      newTodoItem: ''
+      newTodoItem: '',
+      showModal: false
     }
   },
   methods: {
     addTodo () {
       if(this.newTodoItem !== '') {
-        let obj = { completed: false, item: this.newTodoItem };
-        // newtodoitem 저장
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        // this.$emit('이벤트이름', 인자1,인자2,,)
+        // this.$emit('addTodoItem', this.newTodoItem)
+        this.$store.commit('addOneItem', this.newTodoItem)
         this.clearInput();
+      } else {
+        this.showModal = !this.showModal;
       }
     },
     clearInput () {
       // 초기화..
       this.newTodoItem = '';
     }
+  },
+  components: {
+    Modal
   }
 }
 </script>
@@ -57,5 +85,10 @@ export default {
   .addBtn {
     color: #ffffff;
     vertical-align: middle;
+  }
+  .cloaseModalBtn {
+    color: #42b983;
+    float: right;
+    cursor: pointer;
   }
 </style>
