@@ -1,26 +1,19 @@
 <template>
-  <footer class="clearAllContainer shadow">
+  <footer class="clearAllContainer">
     <button 
       class="clearAllBtn"
-      v-on:click="clearTodo"
+      v-on:click="clearAllItem"
       >Clear All</button>
   </footer>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
-
 export default {
   methods: {
-    ...mapMutations({
-      clearTodo: 'removeAllItem'
-    })
-    // clearTodo() {
-    //   // this.$emit('clearAllItems')
-    //   this.$store.commit('removeAllItem')
-    // }
+    clearAllItem() {
+      this.$emit('clearAllTodo');
+    }
   }
-
 }
 </script>
 
@@ -40,5 +33,6 @@ export default {
   display: block;
   width: 100%;
   height: 100%;
+  cursor: pointer;
 }
 </style>
