@@ -2,17 +2,17 @@
   <div>
     <transition-group name="list" tag="ul">
       <li class="shadow" 
-        v-for="(todoItem, index) in propsdata" 
+        v-for="(todoItem, index) in this.storedTodoItems" 
         v-bind:key="todoItem.item">
           <i class="fas fa-check checkBtn"
           v-bind:class="{ checkBtnCompleted : todoItem.completed }"
-          v-on:click="toggleCompletedItem(todoItem, index)"></i>
+          v-on:click="toggleCompletedItem({todoItem, index})"></i>
           <strong 
             v-bind:class="{ textCompleted : todoItem.completed }"
             >{{ todoItem.item }}</strong>
           <i 
             class="fas fa-trash removeBtn"
-            v-on:click="removeOneItem(todoItem, index)"
+            v-on:click="removeOneItem({todoItem, index})"
             ></i>
         </li>
       </transition-group>
@@ -20,19 +20,39 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapMutations } from 'vuex';
+
 export default {
-  props: {
-    propsdata: Array
-  },
   methods: {
-    removeOneItem(todoItem, index) {
-       // this.$emit('이벤트이름', 인자1,인자2,,)
-      //  this.$store.commit('이벤트이름', {인자1, 인자2})
-      this.$emit('removeTodoItem', todoItem, index)
-    },
-    toggleCompletedItem(todoItem, index) {
-      this.$emit('toggleCompletedTodoItem', todoItem, index);
-    }
+    ...mapMutations({
+        removeOneItem: 'removeAppItem',
+        toggleCompletedItem:  'toggleCheckAppItem'
+      })
+    // removeOneItem(todoItem, index) {
+    //    // this.$emit('이벤트이름', 인자1,인자2,,)
+    //   //  this.$store.commit('이벤트이름', {인자1, 인자2})
+    //   // this.$emit('removeTodoItem', todoItem, index);
+
+    //   // vuex mutations 적용
+    //   this.$store.commit('removeAppItem', {todoItem, index})
+    // },
+    // toggleCompletedItem(todoItem, index) {
+    //   // this.$emit('toggleCompletedTodoItem', todoItem, index);
+
+    //   // vuex mutations 적용
+    //   this.$store.commit('toggleCheckAppItem', {todoItem, index})
+    // }
+  },
+  computed: {
+    // todoItems() {
+    //   return this.$store.getters.storedTodoItems
+    // }
+    ...mapGetters(['storedTodoItems']),
+    // getters의 이름과 실제로 사용하는 이름이 다를때 객체화
+    // ...mapGetters({
+    //   todoItems: 'storedTodoItems'
+    // })
+    // ...mapState(['todoItems'])
   }
 }
 </script>

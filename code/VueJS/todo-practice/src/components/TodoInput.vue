@@ -17,8 +17,11 @@
         <i class="fas fa-times cloaseModalBtn"
         v-on:click="closeModalBtn"></i>
       </h3>
-      <p slot="body">
-        내용을 입력하세요.  
+      <p slot="body" v-if="defaultCondition">
+        {{emptyMsg}}
+      </p> 
+      <p slot="body" v-else>
+        {{duplicateMsg}}
       </p> 
     </modal>
   </div>
@@ -31,7 +34,10 @@ export default {
   data () {
     return {
       newTodoItem: '',
-      showModal: false
+      showModal: false,
+      defaultCondition: true,
+      emptyMsg: '내용을 입력하세요.',
+      duplicateMsg: '이미 등록된 항목입니다. 다른 이름으로 등록해 주세요.'
     }
   },
   components: {
@@ -40,7 +46,21 @@ export default {
   methods: {
     addTodoItem() {
       if(this.newTodoItem !== '') {
-        this.$emit('addOneItem', this.newTodoItem);
+        // this.$emit('addOneItem', this.newTodoItem);
+        // const arr = [];
+        // for(let i = 0; i < localStorage.length ; i ++){
+        //   if(localStorage.key(i) !== 'loglevel:webpack-dev-server') {
+        //     arr.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
+        //     console.log(arr.indexOf(this.newTodoItem) == -1)
+        //     if(arr.indexOf(this.newTodoItem) == -1) {
+        //       this.$store.commit('addAppItem', this.newTodoItem);
+        //     }else {
+        //       this.showModal = !this.showModal;
+        //       this.defaultCondition = false
+        //     }
+        //   }
+        // }
+        this.$store.commit('addAppItem', this.newTodoItem);
         this.clearTodoItem();
       }else {
         this.showModal = !this.showModal
