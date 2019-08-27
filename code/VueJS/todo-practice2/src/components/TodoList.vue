@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li 
-        v-for="(todoItem, index) in this.$store.state.todoItems"
+        v-for="(todoItem, index) in this.getTodoItems"
         v-bind:key="todoItem.item"
         class="shadow"
         >
@@ -23,26 +23,30 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapGetters } from 'vuex';
 
 export default {
   props: {
     propsdata: Array
   },
-  methods: {
-    // ...mapMutations[{
-    //   toggleCompleteItem: 'toggleCompleteAppItem',
-    //   removeTodoItem: 'removeTodoAppItem'
-    // }]
-    toggleCompleteItem(todoItem, index) {
-      this.$store.commit('toggleCompleteAppItem', {todoItem, index});
-      // this.$emit('toggleCompleteAppItem', todoItem, index)
-    },
-    removeTodoItem(todoItem, index) {
-      this.$store.commit('removeTodoAppItem', {todoItem, index});
-      // this.$emit('removeTodoAppItem', todoItem, index);
-    }
+  computed: {
+    ...mapState(['todoItems']),
+    ...mapGetters(['getTodoItems'])
   },
+  methods: {
+    ...mapMutations({
+      toggleCompleteItem: 'toggleCompleteAppItem',
+      removeTodoItem: 'removeTodoAppItem'
+    })
+    // toggleCompleteItem(todoItem, index) {
+    //   this.$store.commit('toggleCompleteAppItem', {todoItem, index});
+    //   // this.$emit('toggleCompleteAppItem', todoItem, index)
+    // },
+    // removeTodoItem(todoItem, index) {
+    //   this.$store.commit('removeTodoAppItem', {todoItem, index});
+    //   // this.$emit('removeTodoAppItem', todoItem, index);
+    // },
+  }
 }
 </script>
 
