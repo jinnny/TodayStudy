@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>prototype 연습</title>
+</head>
+<body>
+<script>
+  function Person() {
+
+  }
+  const joon = new Person();
+  const jisoo = new Person();
+  console.log(joon, jisoo);
+
+  Person.prototype.getType = function () {
+      return '인간';
+  };
+
+  console.log(joon.getType());
+  console.log(jisoo.getType());
+
+  joon.getType = function () {
+      return '사람';
+  };
+
+  jisoo.age = 251;
+
+  console.log('joon:' + joon.getType());
+  console.log('jinsoo:' + jisoo.getType() + jisoo.age);
+
+  function People(name) {
+      this.name = name || '혁준';
+  }
+
+  People.prototype.getName = function () {
+      return this.name
+  }
+
+  function Korean(name) {
+  }
+  Korean.prototype = new People();
+
+  const kor1 = new Korean();
+  console.log(kor1.getName());
+
+  const kor2 = new Korean('지수');
+  console.log(kor2.getName(name));
+
+  function People2() {
+      this.name = name || '혁준';
+  }
+
+  Person.prototype.getName = function () {
+      return this.name
+  }
+
+
+
+</script>
+</body>
+</html>
