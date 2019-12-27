@@ -10,5 +10,8 @@ export default {
   },
   SET_USER_INFO(state, userInfo) {
     state.user = userInfo;
+  },
+  SET_ASK_ITEM(state, item) {
+    state.item = item;
   }
 }

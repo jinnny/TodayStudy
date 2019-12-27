@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <tool-bar/>
-    <router-view/>
+    <transition name="page">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
@@ -17,4 +19,21 @@ export default {
 </script>
 
 <style>
+  a {
+    text-decoration: none;
+  }
+  a:link,
+  a:visited {
+    color: #2f2f2f;
+  }
+  a:hover {
+    color: #5aac44;
+    text-decoration: underline;
+  }
+  .page-enter-active, .page-leave-active {
+    transition: opacity .2s;
+  }
+  .page-enter, .page-leave-to {
+    opacity: 0;
+  }
 </style>

@@ -1,35 +1,29 @@
 <template>
-  <div>
-    <h1>ask</h1>
-    <ul>
-      <li v-for="(item, index) in fetchedAsk" :key="item + index">
-        <router-link :to="`/item/${item.id}`" :href="item.url">{{ item.title }}</router-link>
-        <small>{{ item.time_ago }} by <b>{{ item.user }}</b></small>
-      </li>
-    </ul>
-  </div>
+  <list-item/>
+<!--  <div>-->
+<!--    <h1>ask</h1>-->
+<!--    <ul class="news-list">-->
+<!--      <li class="post" v-for="(item, index) in fetchedAsk" :key="item + index">-->
+<!--        <mark class="points">{{item.points}}</mark>-->
+<!--        <div>-->
+<!--          <h2 class="news-post__title">-->
+<!--            <router-link :to="`/item/${item.id}`">{{ item.title }}</router-link>-->
+<!--          </h2>-->
+<!--          <small class="news-user__info">{{ item.time_ago }} by  <router-link :to="`/user/${item.user}`">{{ item.user }}</router-link></small>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
 </template>
 
 <script>
-import {  mapGetters } from 'vuex';
+import ListItem from '../components/ListItem';
 export default {
-  computed: {
-    // ...mapState({
-    //   ask: state => state.ask
-    // })
-    ...mapGetters([
-      'fetchedAsk'
-    ])
-  },
-  created() {
-    this.$store.dispatch('FETCH_ASK')
-      // .then(response => this.ask = response.data)
-      // // eslint-disable-next-line no-console
-      // .catch(error => console.log(error))
+  components: {
+    ListItem
   }
 }
 </script>
 
 <style scoped>
-
 </style>
