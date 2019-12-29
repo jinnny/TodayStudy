@@ -7,5 +7,8 @@ export default {
   },
   SET_JOBS_ITEM(state, jobs) {
     state.jobs = jobs;
+  },
+  SET_ASK_DETAIL(state, askDetail) {
+    state.askDetail = askDetail;
   }
 }

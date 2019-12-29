@@ -9,7 +9,13 @@ export const store = new Vuex.Store({
   state: {
     news: {},
     ask: {},
-    jobs: {}
+    jobs: {},
+    askDetail: {}
+  },
+  getters: {
+    askItem(state) {
+      return state.askDetail
+    }
   },
   mutations,
   actions

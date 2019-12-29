@@ -1,4 +1,4 @@
-import { fetchNews, fetchAsk, fetchJobs } from '../api/index';
+import { fetchNews, fetchAsk, fetchJobs, fetchAskDetail } from '../api/index';
 
 export default {
   FETCH_NEWS_ITEM(context) {
@@ -21,6 +21,14 @@ export default {
     fetchJobs()
       .then(({data}) => {
         commit('SET_JOBS_ITEM', data)
+      })
+      // eslint-disable-next-line no-console
+      .catch(error => console.log(error));
+  },
+  FETCH_ASK_DETAIL({commit}, id){
+    fetchAskDetail(id)
+      .then(({data}) => {
+        commit('SET_ASK_DETAIL', data)
       })
       // eslint-disable-next-line no-console
       .catch(error => console.log(error));

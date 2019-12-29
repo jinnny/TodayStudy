@@ -4,7 +4,12 @@
       <template v-if="item.points">
         <mark>{{ item.points || 0 }}</mark>
       </template>
-      <router-link to="/news">{{ item.title }}</router-link>
+      <template v-if="item.type === 'ask'">
+        <router-link :to="`/ask${item.id}`">{{ item.title }}</router-link>
+      </template>
+      <template v-else>
+        <a :href="item.url">{{ item.title }}</a>
+      </template>
       <small>{{ item.time_ago }}</small> by
       <router-link :to="`/user/${item.user}`" v-if="item.user">{{ item.user }}</router-link>
       <a :href="item.url" v-else>{{ item.domain }}</a>

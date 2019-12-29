@@ -16,9 +16,14 @@ function fetchJobs() {
   return axios.get(`${config.baseUrl}jobs/1.json`)
 }
 
+function fetchAskDetail(id) {
+  return axios.get(`${config.baseUrl}item/${id}.json`)
+}
+
 
 export {
   fetchNews,
   fetchAsk,
-  fetchJobs
+  fetchJobs,
+  fetchAskDetail
 }

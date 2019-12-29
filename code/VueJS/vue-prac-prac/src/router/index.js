@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import News from '../views/News.vue';
 import Jobs from '../views/Jobs.vue';
 import Ask from '../views/Ask.vue';
+import AskDetail from '../views/AskDetail.vue';
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,11 @@ export const router = new VueRouter({
       path: '/ask',
       name: 'ask',
       component: Ask
+    },
+    {
+      path: '/ask:id',
+      name: 'askDetail',
+      component: AskDetail
     }
   ]
 });
