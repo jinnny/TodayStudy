@@ -5,15 +5,36 @@
   -->
 
 <template>
-  <div>
-    {{ askItem }}
-  </div>
+  <article>
+    <h1>{{ askItem.title }}</h1>
+    <div>
+      <user-info :user-info-item="askItem">
+      <router-link :to="`/user/${askItem.user}`" slot="userName">{{ askItem.user }}</router-link>
+      <small slot="UserJoin">{{ askItem.time_ago }}</small>
+      </user-info>
+    </div>
+    <div v-html="askItem.content"></div>
+    <ul>
+      <li v-for="(comment, index) in askItem.comments" :key="comment+index">
+        <div v-html="comment.content"></div>
+        <ul v-if="comment.comments">
+          <li v-for="(comm, index) in comment.comments" :key="comm + index">
+            <p><b>{{ comm.user }}</b> <small>{{ comm.time_ago }}</small></p>
+            <div v-html="comm.content"></div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </article>
 </template>
 
 <script>
+import UserInfo from '../components/UserInfo';
 import { mapGetters } from 'vuex';
 export default {
-  name: "AskDetail",
+  components: {
+    UserInfo
+  },
   computed: {
     ...mapGetters([
       'askItem'

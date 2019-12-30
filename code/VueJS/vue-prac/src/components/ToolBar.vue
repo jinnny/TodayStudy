@@ -13,5 +13,10 @@
 </script>
 
 <style scoped>
-
+div {
+  display: flex;
+}
+a {
+  margin: 14px;
+}
 </style>

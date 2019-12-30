@@ -5,7 +5,7 @@
         <mark>{{ item.points || 0 }}</mark>
       </template>
       <template v-if="item.type === 'ask'">
-        <router-link :to="`/ask${item.id}`">{{ item.title }}</router-link>
+        <router-link :to="`/ask/${item.id}`">{{ item.title }}</router-link>
       </template>
       <template v-else>
         <a :href="item.url">{{ item.title }}</a>

@@ -10,5 +10,8 @@ export default {
   },
   SET_ASK_DETAIL(state, askDetail) {
     state.askDetail = askDetail;
+  },
+  SET_USER_INFO(state, userInfo) {
+    state.userInfo = userInfo
   }
 }

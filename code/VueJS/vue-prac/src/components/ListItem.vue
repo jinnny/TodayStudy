@@ -25,27 +25,20 @@
 <script>
 export default {
   created() {
-    const name = this.$route.name;
-    let actionName = 'FETCH_ASK';
-    if(name === 'news') {
-      actionName = 'FETCH_NEWS';
-    }else if (name === 'jobs') {
-      actionName = 'FETCH_JOBS';
-    }else {
-      actionName = 'FETCH_ASK';
-    }
-    this.$store.dispatch(actionName);
+    // const name = this.$route.name;
+    // let actionName = 'FETCH_ASK';
+    // if(name === 'news') {
+    //   actionName = 'FETCH_NEWS';
+    // }else if (name === 'jobs') {
+    //   actionName = 'FETCH_JOBS';
+    // }else {
+    //   actionName = 'FETCH_ASK';
+    // }
+    // this.$store.dispatch(actionName);
   },
   computed: {
     listItems() {
-      const name = this.$route.name;
-      if(name === 'news') {
-        return this.$store.state.news;
-      }else if (name === 'jobs') {
-        return this.$store.state.jobs;
-      }else {
-        return this.$store.state.ask;
-      }
+      return this.$store.state.list;
     }
   }
 }
