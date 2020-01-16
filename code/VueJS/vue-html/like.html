@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <p>{{ first }} 곱하기 {{ second }}</p>
+    <input type="text" ref="answer" v-model="value">
+    <button @click="submit">button</button>
+    <p>{{ result }}</p>
+  </div>
+  <script>
+    const app = new Vue({
+      el: '#root',
+      data: {
+        first: Math.ceil(Math.random() * 9),
+        second: Math.ceil(Math.random() * 9),
+        value: '',
+        result: ''
+      },
+      methods: {
+        reset() {
+          this.result = '정답입니다';
+          this.first = Math.ceil(Math.random() * 9);
+          this.second = Math.ceil(Math.random() * 9);
+        },
+        submit() {
+          if(this.first * this.second === parseInt(this.value)) {
+            this.reset();
+          }else {
+            this.result = '틀렸습니다.'
+          }
+          this.value = '';
+          this.$refs.answer.focus();
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -13,7 +13,7 @@ export default class MyCheckbox extends Vue{
 
     @Emit()
     change (event: Event) {
-        return event.target.checked;
+        return (event.target as HTMLInputElement).checked;
     }
 }
 </script>

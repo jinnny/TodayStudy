@@ -42,10 +42,10 @@ export default class Home extends Vue {
   }
 
   increase() {
-    this.$store.dispatch('increase')
+    this.$store.dispatch('increase');
   }
   decrease() {
-    this.$store.dispatch('decrease')
+    this.$store.dispatch('decrease');
   }
 
   @Provide('mess') ms: string = 'provide/inject example';
