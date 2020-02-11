@@ -6,8 +6,17 @@
 </template>
 
 <script>
+// import { provideStore } from './composables/use-store';
+// import { useStore } from './composables/use-store';
+
 import MenuBar from './components/MenuBar';
 export default {
+  // setup(props, {root: {$store}}) {
+  //   provideStore($store)
+  // },
+  // setup() {
+  //   const store = useStore();
+  // }
   name: 'app',
   components: {
     MenuBar

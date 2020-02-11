@@ -17,12 +17,24 @@
 </template>
 
 <script>
+import {computed} from '@vue/composition-api'
+
 export default {
-  computed:  {
-    listItem() {
-      return this.$store.state.list
+
+  setup (props, context) {
+    const listItem = computed(() =>
+      context.root.$store.state.list
+    )
+
+    return {
+      listItem
     }
   }
+  // computed:  {
+  //   listItem() {
+  //     return this.$store.state.list
+  //   }
+  // }
 };
 </script>
 

@@ -14,7 +14,8 @@ export const router = new VueRouter({
       path: '/',
       name: 'home',
       // component: ListView
-      component: List('news')
+      component: List('news'),
+      redirect: '/news'
     },
     {
       path: '/news',
